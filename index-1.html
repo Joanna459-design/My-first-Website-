@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Joanna's Crochet Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #fdf6ee;
+      --blush: #f2c4b0;
+      --lilac: #c9b8e8;
+      --sage: #a8c5a0;
+      --brown: #7a4f3a;
+      --dark: #2c1a0e;
+      --gold: #d4a853;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fdf6ee 0%, #f5e6d8 50%, #ede0f5 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '🧶';
+      font-size: 200px;
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      opacity: 0.08;
+      transform: rotate(20deg);
+    }
+    .hero::after {
+      content: '✂️';
+      font-size: 150px;
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      opacity: 0.06;
+      transform: rotate(-15deg);
+    }
+    .hero-tag {
+      background: var(--lilac);
+      color: var(--dark);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 20px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--brown);
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #6b4c3b;
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .scroll-hint {
+      animation: bounce 2s infinite;
+      font-size: 1.5rem;
+    }
+
+    /* STATS */
+    .stats {
+      background: var(--brown);
+      color: white;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .stat {
+      padding: 32px 40px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+
+    /* SECTION */
+    section { padding: 80px 20px; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      text-align: center;
+      margin-bottom: 12px;
+      color: var(--dark);
+    }
+    .section-sub {
+      text-align: center;
+      color: #8a6a5a;
+      margin-bottom: 50px;
+      font-size: 0.95rem;
+    }
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 12px auto 50px;
+      border-radius: 2px;
+    }
+
+    /* PORTFOLIO GRID */
+    .portfolio {
+      background: white;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .card {
+      background: var(--cream);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(122,79,58,0.1);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(122,79,58,0.15);
+    }
+    .card-emoji {
+      font-size: 4rem;
+      text-align: center;
+      padding: 40px 20px 20px;
+      background: linear-gradient(135deg, #f5e6d8, #ede0f5);
+    }
+    .card-body { padding: 20px; }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--dark);
+    }
+    .card-desc {
+      font-size: 0.88rem;
+      color: #7a6058;
+      line-height: 1.6;
+    }
+    .card-tag {
+      display: inline-block;
+      margin-top: 12px;
+      background: var(--lilac);
+      color: var(--dark);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* CURRENT PROJECTS */
+    .current { background: linear-gradient(135deg, #ede0f5, #fdf6ee); }
+    .wip-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      max-width: 800px;
+      margin: auto;
+    }
+    .wip-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      flex: 1;
+      min-width: 240px;
+      border-left: 4px solid var(--lilac);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .wip-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+    .wip-card p { font-size: 0.88rem; color: #7a6058; line-height: 1.6; }
+    .progress-bar {
+      margin-top: 14px;
+      background: #f0e8e0;
+      border-radius: 10px;
+      height: 6px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--lilac), var(--blush));
+    }
+    .progress-label {
+      font-size: 0.75rem;
+      color: #9a7a6a;
+      margin-top: 6px;
+    }
+
+    /* ABOUT */
+    .about-inner {
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+    }
+    .about-inner p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #5a3d30;
+      margin-bottom: 20px;
+    }
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .tool {
+      background: var(--sage);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+    }
+    footer span { color: var(--gold); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-tag">Handmade with love 🧡</div>
+    <h1>Joanna's<br/><em>Crochet Studio</em></h1>
+    <p>Student. Creator. Maker of beautiful things — one stitch at a time.</p>
+    <div class="scroll-hint">↓</div>
+  </section>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">15+</div>
+      <div class="stat-label">Pieces Made</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Year Crocheting</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Ideas Ahead</div>
+    </div>
+  </div>
+
+  <section class="portfolio">
+    <h2 class="section-title">My Creations</h2>
+    <div class="divider"></div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-emoji">🎩</div>
+        <div class="card-body">
+          <div class="card-title">Durag</div>
+          <div class="card-desc">My very first major piece — a fully crocheted durag that started it all.</div>
+          <span class="card-tag">Headwear</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-emoji">🐱</div>
+        <div class="card-body">
+          <div class="card-title">Cat Beanies × 2</div>
+          <div class="card-desc">Adorable cat-ear beanies, soft and cozy. Made two and loved every stitch.</div>
+          <span class="card-tag">Headwear</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-emoji">🎀</div>
+        <div class="card-body">
+          <div class="card-title">Scrunchies × 2</div>
+          <div class="card-desc">Chunky crocheted scrunchies — functional and fashionable.</div>
+          <span class="card-tag">Accessories</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-emoji">🌸</div>
+        <div class="card-body">
+          <div class="card-title">Bandanas × 8</div>
+          <div class="card-desc">Eight bandanas in different styles — my most produced piece so far.</div>
+          <span class="card-tag">Accessories</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-emoji">🪖</div>
+        <div class="card-body">
+          <div class="card-title">Beret</div>
+          <div class="card-desc">A classic crocheted beret — chic, handmade, and completely mine.</div>
+          <span class="card-tag">Headwear</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="current">
+    <h2 class="section-title">Works in Progress</h2>
+    <div class="divider"></div>
+    <div class="wip-cards">
+      <div class="wip-card">
+        <h3>🧣 Poncho</h3>
+        <p>A cozy oversized poncho — flowing and free-spirited.</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+        <div class="progress-label">60% complete</div>
+      </div>
+      <div class="wip-card">
+        <h3>🌺 Hibiscus Top</h3>
+        <p>A crocheted top with a hand-made hibiscus flower joined to the center. My most ambitious piece yet.</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+        <div class="progress-label">40% complete</div>
+      </div>
+      <div class="wip-card">
+        <h3>🎂 Birthday Two-Piece</h3>
+        <p>Lilac off-shoulder top + granny square skirt in lilac, white & black. For my August birthday!</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:10%"></div></div>
+        <div class="progress-label">Planning stage</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="about-inner">
+      <h2 class="section-title">About Me</h2>
+      <div class="divider"></div>
+      <p>I'm Joanna — a student from Nasarawa State, Nigeria, who picked up a crochet hook less than a year ago and never looked back. I make everything for myself, piece by piece building a wardrobe that is entirely handmade.</p>
+      <p>I also use AI as a daily tool for budgeting, cooking, writing, and learning — because creativity and technology go hand in hand.</p>
+      <div class="tools">
+        <span class="tool">🧶 Crochet</span>
+        <span class="tool">✍️ Novel Writing</span>
+        <span class="tool">🤖 AI Tools</span>
+        <span class="tool">👗 Fashion</span>
+        <span class="tool">🍳 Cooking</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Handcrafted by <span>Joanna Maiganda Yasari</span> · Lafia, Nasarawa State 🇳🇬</p>
+    <p style="margin-top:8px">Made with yarn, patience, and a lot of love 🧡</p>
+  </footer>
+
+</body>
+</html>
